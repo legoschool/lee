@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>프로필 구조 미리보기 · LEGO 스타일</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Baloo+2:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --red:#E3000B; --yellow:#FFCD00; --blue:#006DB7; --green:#00963B;
+    --orange:#FF7C00; --lime:#A5CD39; --purple:#923978; --white:#F7F7F2;
+    --plate:#3FA34D; --black:#1B1B1B;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Baloo 2",system-ui,sans-serif;color:var(--black);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:"Fredoka","Baloo 2",sans-serif;margin:0;}
+
+  .baseplate{min-height:100vh;background-color:var(--plate);
+    background-image:radial-gradient(circle at center, rgba(255,255,255,.35) 0, rgba(255,255,255,.35) 4px, rgba(0,0,0,.06) 5px, transparent 6px);
+    background-size:34px 34px;}
+  .wrap{max-width:780px;margin:0 auto;padding:28px 16px 60px;}
+
+  /* 안내 배너 */
+  .banner{background:rgba(0,0,0,.78);color:#fff;border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.6;}
+  .banner b{color:var(--yellow);}
+
+  /* 브릭 */
+  .brick{border:3px solid rgba(0,0,0,.8);border-radius:12px;padding:20px 22px;position:relative;
+    box-shadow:0 6px 0 0 rgba(0,0,0,.25),0 10px 18px -6px rgba(0,0,0,.35);margin-top:16px;}
+  .studs{position:absolute;top:-10px;left:14px;display:flex;gap:8px;}
+  .stud{width:14px;height:14px;border-radius:999px;box-shadow:inset 0 2px 2px rgba(255,255,255,.45),inset 0 -2px 3px rgba(0,0,0,.25);}
+
+  .bg-red{background:var(--red);color:#fff;} .st-red{background:var(--red);}
+  .bg-yellow{background:var(--yellow);} .st-yellow{background:var(--yellow);}
+  .bg-blue{background:var(--blue);color:#fff;} .st-blue{background:var(--blue);}
+  .bg-green{background:var(--green);color:#fff;} .st-green{background:var(--green);}
+  .bg-orange{background:var(--orange);} .st-orange{background:var(--orange);}
+  .bg-lime{background:var(--lime);} .st-lime{background:var(--lime);}
+  .bg-purple{background:var(--purple);color:#fff;} .st-purple{background:var(--purple);}
+  .bg-white{background:var(--white);} .st-white{background:var(--white);}
+
+  /* 섹션 제목 라벨 */
+  .sec{margin-top:30px;}
+  .sec-title{display:inline-flex;align-items:center;gap:8px;border:3px solid rgba(0,0,0,.8);border-radius:12px;
+    padding:6px 16px;font-weight:700;font-size:20px;box-shadow:0 4px 0 0 rgba(0,0,0,.22);}
+
+  /* 자리표시(placeholder) — 들어갈 항목 안내 */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:600px){.grid2{grid-template-columns:1fr;}}
+  .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .between{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline;}
+
+  .field{border:2px dashed rgba(0,0,0,.28);border-radius:8px;padding:5px 10px;font-size:13px;
+    color:rgba(0,0,0,.55);background:rgba(255,255,255,.45);font-weight:600;}
+  .bg-red .field,.bg-blue .field,.bg-green .field,.bg-purple .field{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.12);}
+  .chip{display:inline-block;border:2px solid rgba(0,0,0,.6);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;background:rgba(255,255,255,.85);color:var(--black);}
+  .big{font-size:22px;font-weight:700;}
+  .muted{opacity:.8;font-weight:600;}
+  .tabname{font-size:11px;font-weight:700;letter-spacing:.04em;opacity:.65;text-transform:uppercase;margin-left:6px;}
+
+  .avatar{width:104px;height:104px;border-radius:12px;border:3px solid rgba(0,0,0,.8);background:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:34px;flex-shrink:0;box-shadow:0 4px 0 0 rgba(0,0,0,.22);}
+  .hero{display:flex;gap:18px;align-items:center;}
+  @media(max-width:600px){.hero{flex-direction:column;text-align:center;}}
+
+  .studmeter{display:flex;gap:4px;}
+  .studmeter span{width:12px;height:12px;border-radius:999px;box-shadow:inset 0 2px 2px rgba(255,255,255,.45),inset 0 -2px 3px rgba(0,0,0,.25);}
+  .sm-on{background:var(--yellow);} .sm-off{background:rgba(0,0,0,.15);}
+
+  .yearbadge{display:inline-block;border:2px solid rgba(0,0,0,.7);border-radius:8px;background:#fff;padding:2px 10px;font-weight:700;font-size:14px;margin:14px 0 2px;}
+  .yeartl{font-family:"Fredoka",sans-serif;font-size:24px;font-weight:700;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.4);margin-top:14px;}
+
+  .btn{display:inline-block;border:2px solid rgba(0,0,0,.7);border-radius:8px;background:#fff;color:var(--black);padding:4px 12px;font-weight:700;font-size:13px;}
+  .foot{margin-top:34px;text-align:center;color:rgba(255,255,255,.92);font-size:12px;}
+  .foot .pill{display:inline-block;background:rgba(0,0,0,.22);border:2px solid rgba(0,0,0,.4);border-radius:999px;padding:5px 12px;}
+</style>
+</head>
+<body>
+<div class="baseplate">
+  <div class="wrap">
+
+    <div class="banner">
+      🧱 <b>구조 미리보기</b> — 실제 내용은 비어 있고, <b>각 칸에 들어갈 항목</b>만 점선 박스로 표시했습니다.
+      이 틀이 구글 시트의 탭/열과 1:1로 연결됩니다. (탭 이름은 각 섹션 제목 옆 회색 글씨)
+    </div>
+
+    <!-- 1. 프로필 -->
+    <div class="brick bg-yellow">
+      <div class="studs"><span class="stud st-yellow"></span><span class="stud st-yellow"></span><span class="stud st-yellow"></span><span class="stud st-yellow"></span><span class="stud st-yellow"></span><span class="stud st-yellow"></span></div>
+      <div class="hero">
+        <div class="avatar">🧑‍🏫</div>
+        <div style="flex:1;">
+          <div class="row"><span class="big">이름</span><span class="chip">● 협업 가능</span></div>
+          <div class="field" style="margin-top:6px;">직함 (예: 레고에듀케이션 공인강사 · 메이커 교사)</div>
+          <div class="field" style="margin-top:6px;">🏫 소속 (학교/기관)</div>
+          <div class="field" style="margin-top:6px;">한 줄 소개(태그라인)</div>
+          <div class="row" style="margin-top:8px;">
+            <span class="field">📍 지역</span><span class="field">✉️ 이메일</span><span class="field">🌐 웹사이트</span>
+          </div>
+          <div class="row" style="margin-top:8px;">
+            <span class="btn">🔗 블로그</span><span class="btn">▶️ YouTube</span><span class="btn">🐙 GitHub</span><span class="btn">✉️ Email</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tabname" style="margin-top:6px;">시트 탭: Basics · Socials</div>
+
+    <!-- 2. 소개 -->
+    <div class="sec">
+      <span class="sec-title bg-orange">👋 소개 <span class="tabname">About</span></span>
+    </div>
+    <div class="brick bg-white">
+      <div class="studs"><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span></div>
+      <div class="field">자기소개 + 교육 철학 본문 (여러 줄)</div>
+    </div>
+
+    <!-- 3. 전문분야 -->
+    <div class="sec"><span class="sec-title bg-lime">🧱 전문분야 <span class="tabname">Skills</span></span></div>
+    <div class="grid2">
+      <div class="brick bg-blue">
+        <div class="studs"><span class="stud st-blue"></span><span class="stud st-blue"></span><span class="stud st-blue"></span><span class="stud st-blue"></span></div>
+        <h3 style="margin-bottom:10px;">분류 (예: 코딩교육)</h3>
+        <div class="between" style="margin-bottom:8px;"><span class="muted">분야명</span><span class="studmeter"><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-off"></span><span class="sm-off"></span></span></div>
+        <div class="between"><span class="muted">분야명</span><span class="studmeter"><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-off"></span><span class="sm-off"></span><span class="sm-off"></span><span class="sm-off"></span></span></div>
+      </div>
+      <div class="brick bg-red">
+        <div class="studs"><span class="stud st-red"></span><span class="stud st-red"></span><span class="stud st-red"></span><span class="stud st-red"></span></div>
+        <h3 style="margin-bottom:10px;">분류 (예: 메이커)</h3>
+        <div class="between" style="margin-bottom:8px;"><span class="muted">분야명</span><span class="studmeter"><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-off"></span></span></div>
+        <div class="between"><span class="muted">분야명</span><span class="studmeter"><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-on"></span><span class="sm-off"></span><span class="sm-off"></span><span class="sm-off"></span></span></div>
+      </div>
+    </div>
+    <div class="tabname" style="margin-top:6px;">숙련도(level 0~100)는 스터드 막대로 표시</div>
+
+    <!-- 4. 연수·강의(진행) -->
+    <div class="sec"><span class="sec-title bg-red" style="color:#fff;">🎤 연수 · 강의 (진행) <span class="tabname" style="color:rgba(255,255,255,.7)">Training</span></span></div>
+    <div class="brick bg-blue">
+      <div class="studs"><span class="stud st-blue"></span><span class="stud st-blue"></span><span class="stud st-blue"></span><span class="stud st-blue"></span><span class="stud st-blue"></span></div>
+      <div class="between"><h3>연수/강의명</h3><span class="muted">날짜</span></div>
+      <div class="field" style="margin-top:6px;">주최기관 · 장소</div>
+      <div class="field" style="margin-top:6px;">설명</div>
+      <div class="row" style="margin-top:10px;"><span class="chip">역할</span><span class="chip">대상</span><span class="chip">차시·시간</span><span class="chip">인원</span></div>
+    </div>
+
+    <!-- 5. 개발 자료 (연도별) -->
+    <div class="sec"><span class="sec-title bg-orange">📦 개발 자료 <span class="tabname">Resources · 연도별</span></span></div>
+    <div class="yearbadge">2024</div>
+    <div class="grid2">
+      <div class="brick bg-purple">
+        <div class="studs"><span class="stud st-purple"></span><span class="stud st-purple"></span><span class="stud st-purple"></span><span class="stud st-purple"></span></div>
+        <div class="between"><h3>자료명</h3><span>🔓</span></div>
+        <div class="field" style="margin-top:6px;">설명</div>
+        <div class="row" style="margin-top:8px;"><span class="chip">종류</span><span class="chip">주제</span><span class="chip">대상</span></div>
+        <div style="margin-top:10px;"><span class="btn">자료 보기 ↗</span></div>
+      </div>
+      <div class="brick bg-green">
+        <div class="studs"><span class="stud st-green"></span><span class="stud st-green"></span><span class="stud st-green"></span><span class="stud st-green"></span></div>
+        <div class="between"><h3>자료명</h3></div>
+        <div class="row" style="margin-top:8px;"><span class="chip">종류</span><span class="chip">주제</span><span class="chip">대상</span></div>
+      </div>
+    </div>
+    <div class="yearbadge">2023</div>
+    <div class="grid2">
+      <div class="brick bg-orange">
+        <div class="studs"><span class="stud st-orange"></span><span class="stud st-orange"></span><span class="stud st-orange"></span><span class="stud st-orange"></span></div>
+        <div class="between"><h3>자료명</h3><span>🔓</span></div>
+        <div class="row" style="margin-top:8px;"><span class="chip">종류</span><span class="chip">주제</span></div>
+      </div>
+    </div>
+
+    <!-- 6. 교단일기 (연도별 타임라인) -->
+    <div class="sec"><span class="sec-title bg-purple" style="color:#fff;">📔 교단일기 · 성장일기 <span class="tabname" style="color:rgba(255,255,255,.7)">Journal · 연도별</span></span></div>
+    <div style="border-left:4px solid rgba(0,0,0,.15);margin-left:6px;padding-left:18px;">
+      <div class="yeartl">2024</div>
+      <div class="brick bg-white">
+        <div class="studs"><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span></div>
+        <div class="between"><h4 style="font-size:18px;">일기 제목</h4><span class="muted" style="font-size:13px;">날짜</span></div>
+        <div class="field" style="margin-top:6px;">내용 (그날의 수업·생각·성장 기록)</div>
+        <div class="row" style="margin-top:8px;"><span class="chip">태그</span><span class="chip">태그</span></div>
+      </div>
+      <div class="yeartl">2023</div>
+      <div class="brick bg-white">
+        <div class="studs"><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span></div>
+        <div class="between"><h4 style="font-size:18px;">일기 제목</h4><span class="muted" style="font-size:13px;">날짜</span></div>
+        <div class="field" style="margin-top:6px;">내용</div>
+      </div>
+    </div>
+
+    <!-- 7. 경력·활동 -->
+    <div class="sec"><span class="sec-title bg-red" style="color:#fff;">💼 경력 · 활동 <span class="tabname" style="color:rgba(255,255,255,.7)">Experience</span></span></div>
+    <div class="brick bg-green">
+      <div class="studs"><span class="stud st-green"></span><span class="stud st-green"></span><span class="stud st-green"></span><span class="stud st-green"></span><span class="stud st-green"></span></div>
+      <div class="between"><h3>역할 · 소속</h3><span class="muted">시작 ~ 종료(또는 현재)</span></div>
+      <div class="field" style="margin-top:6px;">📍 지역 / 설명</div>
+      <div class="field" style="margin-top:6px;">🔹 주요 성과 (여러 줄)</div>
+    </div>
+
+    <!-- 8. 프로젝트 -->
+    <div class="sec"><span class="sec-title bg-purple" style="color:#fff;">🚀 프로젝트 · 운영 <span class="tabname" style="color:rgba(255,255,255,.7)">Projects</span></span></div>
+    <div class="grid2">
+      <div class="brick bg-blue">
+        <div class="studs"><span class="stud st-blue"></span><span class="stud st-blue"></span><span class="stud st-blue"></span><span class="stud st-blue"></span><span class="stud st-blue"></span></div>
+        <div class="between"><h3>제목</h3><span>⭐</span></div>
+        <div class="field" style="margin-top:6px;">설명</div>
+        <div class="row" style="margin-top:8px;"><span class="chip">태그</span><span class="chip">태그</span></div>
+        <div style="margin-top:10px;"><span class="btn">바로가기 ↗</span></div>
+      </div>
+      <div class="brick bg-orange">
+        <div class="studs"><span class="stud st-orange"></span><span class="stud st-orange"></span><span class="stud st-orange"></span><span class="stud st-orange"></span><span class="stud st-orange"></span></div>
+        <div class="between"><h3>제목</h3></div>
+        <div class="field" style="margin-top:6px;">설명</div>
+        <div class="row" style="margin-top:8px;"><span class="chip">태그</span></div>
+      </div>
+    </div>
+
+    <!-- 9. 이수 연수 -->
+    <div class="sec"><span class="sec-title bg-green" style="color:#fff;">📒 이수 연수 <span class="tabname" style="color:rgba(255,255,255,.7)">TrainingReceived</span></span></div>
+    <div class="brick bg-white">
+      <div class="studs"><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span></div>
+      <div class="between" style="border-bottom:1px solid rgba(0,0,0,.1);padding-bottom:8px;margin-bottom:8px;"><span style="font-weight:700;">연수명</span><span class="muted" style="font-size:13px;">기관 · 시간 · 이수일</span></div>
+      <div class="between"><span style="font-weight:700;">연수명</span><span class="muted" style="font-size:13px;">기관 · 시간 · 이수일</span></div>
+    </div>
+
+    <!-- 10. 학력 -->
+    <div class="sec"><span class="sec-title bg-blue" style="color:#fff;">🎓 학력 <span class="tabname" style="color:rgba(255,255,255,.7)">Education</span></span></div>
+    <div class="grid2">
+      <div class="brick bg-white">
+        <div class="studs"><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span><span class="stud st-white"></span></div>
+        <h3>학교</h3>
+        <div class="field" style="margin-top:6px;">전공 · 학위</div>
+        <div class="muted" style="margin-top:4px;font-size:13px;">시작 ~ 종료</div>
+      </div>
+    </div>
+
+    <!-- 11. 수상·자격증 -->
+    <div class="sec"><span class="sec-title bg-orange">🏆 수상 · 자격증 <span class="tabname">Awards</span></span></div>
+    <div class="grid2">
+      <div class="brick bg-yellow">
+        <div class="studs"><span class="stud st-yellow"></span><span class="stud st-yellow"></span><span class="stud st-yellow"></span><span class="stud st-yellow"></span></div>
+        <div class="row">🏅 <h3 style="margin-left:6px;">명칭</h3><span class="chip">자격증</span></div>
+        <div class="muted" style="margin-top:4px;font-size:13px;">발급기관 · 취득일</div>
+      </div>
+      <div class="brick bg-yellow">
+        <div class="studs"><span class="stud st-yellow"></span><span class="stud st-yellow"></span><span class="stud st-yellow"></span><span class="stud st-yellow"></span></div>
+        <div class="row">🏅 <h3 style="margin-left:6px;">명칭</h3><span class="chip">수상</span></div>
+        <div class="muted" style="margin-top:4px;font-size:13px;">주최기관 · 수상일</div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="pill">구조 미리보기 · 내용 비어 있음</span>
+      <div style="margin-top:6px;opacity:.85;">Built with 🧱 LEGO style</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
