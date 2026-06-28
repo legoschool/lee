@@ -8,6 +8,7 @@
  *   /*O_o*\/\ngoogle.visualization.Query.setResponse({ ...JSON... });
  * 따라서 첫 '{' 와 마지막 '}' 사이만 잘라 JSON 으로 파싱합니다.
  */
+import { DEFAULT_SHEET_ID } from "@/data/config";
 
 /** 한 행(row)을 헤더명 -> 셀 문자열 로 매핑한 객체 */
 export type SheetRow = Record<string, string>;
@@ -98,9 +99,10 @@ export async function fetchSheetKeyValue(
   return map;
 }
 
-/** 환경변수에서 시트 ID 읽기 (비어 있으면 빈 문자열) */
+/** 시트 ID 읽기: .env(VITE_GOOGLE_SHEET_ID) 가 있으면 우선, 없으면 기본 시트 */
 export function getSheetId(): string {
-  return (import.meta.env.VITE_GOOGLE_SHEET_ID as string | undefined)?.trim() ?? "";
+  const fromEnv = (import.meta.env.VITE_GOOGLE_SHEET_ID as string | undefined)?.trim();
+  return fromEnv || DEFAULT_SHEET_ID;
 }
 
 export function hasSheetConfigured(): boolean {
