@@ -1,5 +1,5 @@
 /**
- * 레고 스타일 개인 프로필 페이지
+ * 레고 스타일 교육자 프로필 페이지
  * ---------------------------------------------------------------------------
  * 데이터는 useProfile() 가 Google Sheet(또는 샘플)에서 불러옵니다.
  * 레이아웃은 레고 브릭/스터드/베이스플레이트 모티프로 구성했습니다.
@@ -8,9 +8,13 @@ import { useProfile } from "@/hooks/useProfile";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
+import Training from "@/components/sections/Training";
+import Resources from "@/components/sections/Resources";
+import Journal from "@/components/sections/Journal";
 import Experience from "@/components/sections/Experience";
-import Education from "@/components/sections/Education";
 import Projects from "@/components/sections/Projects";
+import TrainingReceived from "@/components/sections/TrainingReceived";
+import Education from "@/components/sections/Education";
 import Awards from "@/components/sections/Awards";
 
 export default function App() {
@@ -35,8 +39,12 @@ export default function App() {
           <Hero basics={data.basics} socials={data.socials} />
           {data.about && <About about={data.about} />}
           <Skills skills={data.skills} />
+          <Training items={data.training} />
+          <Resources items={data.resources} />
+          <Journal entries={data.journal} />
           <Experience items={data.experience} />
           <Projects items={data.projects} />
+          <TrainingReceived items={data.trainingReceived} />
           <Education items={data.education} />
           <Awards items={data.awards} />
         </div>

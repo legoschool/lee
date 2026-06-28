@@ -56,6 +56,11 @@ export default function Hero({
             )}
           </div>
           <p className="mt-1 text-lg font-semibold">{basics.headline}</p>
+          {basics.affiliation && (
+            <p className="text-sm font-semibold text-lego-black/80">
+              🏫 {basics.affiliation}
+            </p>
+          )}
           {basics.tagline && (
             <p className="mt-1 text-sm text-lego-black/70">{basics.tagline}</p>
           )}

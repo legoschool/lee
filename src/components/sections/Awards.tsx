@@ -17,7 +17,14 @@ export default function Awards({ items }: { items: AwardItem[] }) {
                 🏅
               </span>
               <div>
-                <h3 className="text-lg font-bold leading-tight">{a.title}</h3>
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-lg font-bold leading-tight">{a.title}</h3>
+                  {a.kind && (
+                    <span className="rounded-full border-2 border-black/70 bg-white/90 px-2 py-0.5 text-xs font-bold">
+                      {a.kind}
+                    </span>
+                  )}
+                </div>
                 <p className="text-sm font-semibold opacity-80">
                   {[a.issuer, a.date].filter(Boolean).join(" · ")}
                 </p>

@@ -60,6 +60,9 @@ Google Sheet (8개 탭)
 | `docs/google-sheets-setup.md` | 시트 설정 가이드 |
 | `scripts/checkSheet.ts` | 시트 연결 점검 CLI |
 
-## 데이터 섹션 (범용 개인 프로필)
+## 데이터 섹션 (교육자 프로필)
 
-기본 정보 · 소개 · 소셜 링크 · 스킬 · 경력/활동 · 학력 · 프로젝트/작품 · 수상/자격증
+프로필 · 소개 · 전문분야 · **연수·강의(진행)** · **개발 자료(연도별)** · **교단일기·성장일기(연도별)** · 경력/활동 · 프로젝트/운영 · **이수 연수** · 학력 · 수상/자격증
+
+> 시트 탭 12개: `Basics · About · Socials · Skills · Training · TrainingReceived · Resources · Journal · Experience · Education · Projects · Awards`
+> 자세한 열 구성은 `docs/google-sheets-setup.md`, 붙여넣을 예시는 `seed/*.csv`.

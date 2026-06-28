@@ -11,16 +11,21 @@ import type {
   AwardItem,
   EducationItem,
   ExperienceItem,
+  JournalEntry,
   ProfileBasics,
   ProjectItem,
+  ResourceItem,
   Skill,
   SocialLink,
+  TrainingItem,
+  TrainingReceivedItem,
 } from "./types";
 
 export function mapBasics(kv: Record<string, string>): ProfileBasics {
   return {
     name: kv.name ?? "",
     headline: kv.headline ?? "",
+    affiliation: orUndefined(kv.affiliation),
     tagline: orUndefined(kv.tagline),
     avatarUrl: orUndefined(kv.avatarUrl),
     coverUrl: orUndefined(kv.coverUrl),
@@ -58,6 +63,61 @@ export function mapSkills(rows: SheetRow[]): Skill[] {
       name: r.name,
       category: orUndefined(r.category),
       level: toNumber(r.level),
+    }));
+}
+
+export function mapTraining(rows: SheetRow[]): TrainingItem[] {
+  return rows
+    .filter((r) => r.title)
+    .map((r) => ({
+      title: r.title,
+      host: orUndefined(r.host),
+      audience: orUndefined(r.audience),
+      role: orUndefined(r.role),
+      hours: orUndefined(r.hours),
+      participants: orUndefined(r.participants),
+      date: orUndefined(r.date),
+      location: orUndefined(r.location),
+      description: orUndefined(r.description),
+    }));
+}
+
+export function mapTrainingReceived(rows: SheetRow[]): TrainingReceivedItem[] {
+  return rows
+    .filter((r) => r.title)
+    .map((r) => ({
+      title: r.title,
+      host: orUndefined(r.host),
+      hours: orUndefined(r.hours),
+      date: orUndefined(r.date),
+      description: orUndefined(r.description),
+    }));
+}
+
+export function mapResources(rows: SheetRow[]): ResourceItem[] {
+  return rows
+    .filter((r) => r.title)
+    .map((r) => ({
+      title: r.title,
+      type: orUndefined(r.type),
+      audience: orUndefined(r.audience),
+      topic: orUndefined(r.topic),
+      url: orUndefined(r.url),
+      year: orUndefined(r.year),
+      isPublic: r.isPublic !== undefined ? toBool(r.isPublic) : undefined,
+      description: orUndefined(r.description),
+    }));
+}
+
+export function mapJournal(rows: SheetRow[]): JournalEntry[] {
+  return rows
+    .filter((r) => r.title || r.body)
+    .map((r) => ({
+      year: (r.year || r.date || "").slice(0, 4) || "기타",
+      date: orUndefined(r.date),
+      title: r.title ?? "",
+      body: orUndefined(r.body),
+      tags: toList(r.tags, /[,;]/),
     }));
 }
 
@@ -109,6 +169,7 @@ export function mapAwards(rows: SheetRow[]): AwardItem[] {
     .map((r) => ({
       title: r.title,
       issuer: orUndefined(r.issuer),
+      kind: orUndefined(r.kind),
       date: orUndefined(r.date),
       description: orUndefined(r.description),
     }));
