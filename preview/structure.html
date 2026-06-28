@@ -3,269 +3,266 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>프로필 구조 미리보기</title>
+<title>프로필 구조 미리보기 · LEGO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --ink:#544D60; --soft:#9F98AE; --line:#F0EBF5; --card:#FFFFFF;
-    /* 파스텔 팔레트 (배경 / 글자) */
-    --peach:#FFE3D6;   --peach-t:#D2774E;
-    --mint:#D8F1E4;    --mint-t:#3E9C72;
-    --rose:#FBDAE5;    --rose-t:#D16A8C;
-    --apricot:#FCEBCB; --apricot-t:#C2913A;
-    --lav:#E9E0FA;     --lav-t:#8D71CF;
-    --sky:#DBEAFB;     --sky-t:#5C8FD2;
-    --sage:#E5EFD9;    --sage-t:#6E9B53;
+    --red:#E3000B; --blue:#0B7BD8; --yellow:#FFC400; --green:#3AAA35; --orange:#F58220; --purple:#8E44AD;
+    --ink:#222; --soft:#6B7280; --cream:#F3F1E8; --line:#E9E6DA;
   }
   *{box-sizing:border-box;}
-  body{margin:0;color:var(--ink);font-family:"Gowun Dodum",system-ui,sans-serif;
-    -webkit-font-smoothing:antialiased;line-height:1.65;
-    background:
-      radial-gradient(1200px 600px at 15% -5%, #FFF0F4 0%, transparent 55%),
-      radial-gradient(1000px 600px at 100% 0%, #EEF1FE 0%, transparent 50%),
-      linear-gradient(180deg, #FDF7FB 0%, #F4F1FC 45%, #EEF6FB 100%);
-    background-attachment:fixed;}
-  h1,h2,h3,h4{font-family:"Jua","Gowun Dodum",sans-serif;margin:0;font-weight:400;letter-spacing:.2px;}
-  .wrap{max-width:720px;margin:0 auto;padding:34px 18px 70px;}
+  body{margin:0;color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;
+    background-color:var(--cream);
+    background-image:radial-gradient(circle, rgba(0,0,0,.05) 1.6px, transparent 1.7px);
+    background-size:24px 24px;}
+  h1,h2,h3,h4{margin:0;font-family:"Jua",system-ui,sans-serif;font-weight:400;}
+  .wrap{max-width:980px;margin:0 auto;padding:22px 18px 70px;}
 
-  .note{background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:18px;padding:14px 18px;
-    font-size:13px;color:var(--soft);box-shadow:0 8px 24px -16px rgba(150,120,180,.5);backdrop-filter:blur(4px);}
-  .note b{color:var(--ink);}
+  /* 스터드 한 줄 */
+  .studs{display:flex;gap:7px;}
+  .studs i{width:13px;height:13px;border-radius:50%;display:block;
+    background:rgba(255,255,255,.28);
+    box-shadow:inset 0 2px 2px rgba(255,255,255,.55), inset 0 -2px 3px rgba(0,0,0,.22);}
+
+  /* HERO */
+  .hero{position:relative;border-radius:22px;overflow:hidden;border:4px solid #fff;
+    box-shadow:0 12px 30px -12px rgba(0,0,0,.35);
+    background:
+      radial-gradient(circle, rgba(255,255,255,.5) 2px, transparent 2.4px) 0 0/26px 26px,
+      linear-gradient(135deg,#7CC2F5 0%, #4AA3EE 45%, #9BD0F7 100%);
+    padding:40px 22px 44px;text-align:center;}
+  .hero .kicker{font-family:"Jua";color:#fff;letter-spacing:.32em;font-size:14px;opacity:.95;text-shadow:0 1px 2px rgba(0,0,0,.25);}
+  .hero .sub{font-family:"Jua";color:#fff;font-size:16px;margin-top:2px;text-shadow:0 1px 2px rgba(0,0,0,.3);}
+  .hero .title{font-family:"Jua";font-size:64px;line-height:1.05;margin:6px 0 4px;text-shadow:0 3px 0 rgba(0,0,0,.18);}
+  .hero .title .r{color:#E3000B;} .hero .title .o{color:#FF8A00;} .hero .title .g{color:#2BAE3A;} .hero .title .b{color:#0C66C9;}
+  .hero .role{color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.3);margin-bottom:18px;}
+  .herobtns{display:flex;flex-direction:column;gap:14px;align-items:center;}
+
+  /* 큰 브릭 버튼 (스터드 위에) */
+  .bigbrick{position:relative;border:none;border-radius:16px;color:#fff;font-family:"Jua";font-size:22px;
+    padding:18px 30px;min-width:320px;cursor:default;box-shadow:0 7px 0 rgba(0,0,0,.22),0 14px 22px -10px rgba(0,0,0,.4);}
+  .bigbrick .studs{position:absolute;top:-8px;left:50%;transform:translateX(-50%);}
+  .bb-blue{background:var(--blue);} .bb-red{background:var(--red);}
+
+  /* 노란 브릭 내비 */
+  .nav{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:22px 0 6px;}
+  .navbtn{position:relative;background:var(--yellow);border-radius:12px;padding:11px 18px;font-family:"Jua";font-size:17px;color:#1c1c1c;
+    box-shadow:0 5px 0 #D9A400, 0 8px 14px -6px rgba(0,0,0,.3);}
+  .navbtn .studs{position:absolute;top:-6px;left:14px;}
+  .navbtn .studs i{width:10px;height:10px;background:rgba(255,255,255,.4);}
+
+  /* 섹션 바 */
+  .bar{position:relative;border-radius:16px;color:#fff;font-family:"Jua";font-size:27px;padding:15px 26px;margin:38px 0 16px;
+    box-shadow:0 6px 0 rgba(0,0,0,.13),0 14px 22px -12px rgba(0,0,0,.35);}
+  .bar .studs{position:absolute;top:-7px;}
+  .bar .sl{left:20px;} .bar .sr{right:20px;}
+  .bar .tab{font-family:"Noto Sans KR";font-weight:700;font-size:12px;opacity:.9;margin-left:10px;vertical-align:middle;}
+  .b-blue{background:var(--blue);} .b-red{background:var(--red);} .b-green{background:var(--green);}
+  .b-orange{background:var(--orange);} .b-purple{background:var(--purple);}
 
   /* 카드 */
-  .card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px 24px;
-    box-shadow:0 14px 34px -20px rgba(150,125,185,.45);position:relative;margin-top:14px;overflow:hidden;}
-  /* 레고 은은한 힌트: 오른쪽 위 옅은 스터드 2알 */
-  .hint{position:absolute;top:14px;right:16px;display:flex;gap:6px;opacity:.5;}
-  .hint i{width:9px;height:9px;border-radius:999px;display:block;
-    box-shadow:inset 0 1px 1px rgba(255,255,255,.7), inset 0 -1px 1.5px rgba(0,0,0,.06);}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;
+    box-shadow:0 10px 24px -16px rgba(0,0,0,.3);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr;} .bigbrick{min-width:0;width:100%;} .hero .title{font-size:46px;}}
 
-  /* 섹션 제목 */
-  .sec{display:flex;align-items:center;gap:9px;margin:34px 4px 4px;}
-  .sec .ic{width:30px;height:30px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:15px;}
-  .sec h2{font-size:21px;color:var(--ink);}
-  .sec .tab{font-size:11px;color:var(--soft);letter-spacing:.05em;}
+  /* 상단 컬러 띠 + 스터드 가진 카드 (교단일기/연수 등) */
+  .stripcard{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 10px 24px -16px rgba(0,0,0,.3);}
+  .strip{position:relative;height:26px;}
+  .strip .studs{position:absolute;top:7px;left:18px;}
+  .strip .studs i{width:11px;height:11px;}
+  .stripcard .body{padding:16px 20px 18px;}
 
   .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
   .between{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline;}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-  @media(max-width:600px){.grid2{grid-template-columns:1fr;}}
-
-  /* 점선 자리표시 */
-  .ph{border:1.5px dashed #E0D7EC;border-radius:13px;padding:9px 13px;font-size:13px;color:var(--soft);background:#FBF9FE;}
+  .ph{border:1.5px dashed #D6D2C4;border-radius:10px;padding:8px 12px;font-size:13px;color:var(--soft);background:#FAF9F4;}
   .ph + .ph{margin-top:8px;}
-  .title{font-size:17px;color:var(--ink);font-family:"Jua",sans-serif;}
+  .title2{font-family:"Jua";font-size:19px;color:var(--ink);}
   .soft{color:var(--soft);font-size:13px;}
+  .date{color:var(--soft);font-size:13px;font-weight:700;}
 
-  .chip{display:inline-block;border-radius:999px;padding:4px 13px;font-size:12.5px;}
+  /* 아웃라인 태그 칩 */
+  .pill{border:2px solid var(--blue);color:var(--blue);background:#fff;border-radius:999px;padding:4px 14px;font-size:13px;font-weight:700;}
+  /* 채움 칩 */
+  .chip{border-radius:999px;padding:4px 13px;font-size:12.5px;font-weight:700;color:#fff;}
+  .c-red{background:var(--red);} .c-blue{background:var(--blue);} .c-green{background:var(--green);}
+  .c-orange{background:var(--orange);} .c-purple{background:var(--purple);} .c-gray{background:#9AA1AC;}
+
+  /* ID 카드 사진 */
+  .idcard{width:120px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 8px 18px -10px rgba(0,0,0,.35);overflow:hidden;flex-shrink:0;}
+  .idcard .top{position:relative;height:22px;background:#EEF1F4;}
+  .idcard .top .studs{position:absolute;top:6px;left:50%;transform:translateX(-50%);}
+  .idcard .top .studs i{width:10px;height:10px;background:#fff;box-shadow:inset 0 1px 1px rgba(255,255,255,.8),inset 0 -1px 2px rgba(0,0,0,.12);}
+  .idcard .photo{height:120px;display:flex;align-items:center;justify-content:center;font-size:46px;background:linear-gradient(#F7F8FA,#E9EDF2);}
+
+  /* 연도 브릭 탭 */
+  .years{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:4px 0 18px;}
+  .ytab{position:relative;border-radius:13px;color:#fff;font-family:"Jua";text-align:center;padding:12px 16px 9px;min-width:80px;
+    box-shadow:0 5px 0 rgba(0,0,0,.18),0 8px 14px -7px rgba(0,0,0,.35);}
+  .ytab .studs{position:absolute;top:-6px;left:50%;transform:translateX(-50%);}
+  .ytab .studs i{width:10px;height:10px;}
+  .ytab .y{font-size:19px;line-height:1;} .ytab .n{font-size:12px;opacity:.95;margin-top:3px;font-family:"Noto Sans KR";font-weight:700;}
+  .ytab.on{outline:4px solid var(--yellow);outline-offset:1px;}
+
   .meter{display:flex;gap:5px;}
-  .meter i{width:11px;height:11px;border-radius:999px;background:#EEE8F4;display:block;}
+  .meter i{width:12px;height:12px;border-radius:50%;background:#E4E6EA;display:block;}
+  .meter i.on{box-shadow:inset 0 2px 2px rgba(255,255,255,.6),inset 0 -2px 3px rgba(0,0,0,.18);}
 
-  /* Hero */
-  .hero{display:flex;gap:20px;align-items:center;}
-  @media(max-width:600px){.hero{flex-direction:column;text-align:center;}}
-  .hero-card{background:linear-gradient(135deg,#FFF3F7 0%,#F3EEFD 55%,#EAF3FD 100%);}
-  .avatar{width:104px;height:104px;border-radius:50%;background:#fff;border:4px solid #fff;
-    box-shadow:0 10px 24px -10px rgba(150,120,180,.5);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0;}
-  .name{font-size:28px;color:var(--ink);font-family:"Jua",sans-serif;}
-  .badge{display:inline-block;background:var(--mint);color:var(--mint-t);border-radius:999px;padding:3px 12px;font-size:12.5px;}
-  .pillbtn{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.8);border:1px solid var(--line);
-    border-radius:999px;padding:6px 13px;font-size:13px;color:var(--ink);}
-
-  .yearchip{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;
-    padding:4px 15px;font-size:14px;color:var(--ink);font-family:"Jua",sans-serif;margin:16px 0 2px;box-shadow:0 6px 16px -12px rgba(150,120,180,.5);}
-  .tl{border-left:2px dashed #E4DBF0;margin-left:10px;padding-left:22px;}
-  .tl .year{font-family:"Jua",sans-serif;font-size:20px;color:var(--lav-t);margin-top:16px;position:relative;}
-  .tl .year::before{content:"";position:absolute;left:-29px;top:6px;width:14px;height:14px;border-radius:999px;background:var(--lav);border:3px solid #fff;box-shadow:0 0 0 1px var(--line);}
-
-  .linkbtn{display:inline-block;border-radius:999px;padding:6px 15px;font-size:13px;background:var(--sky);color:var(--sky-t);}
-  .foot{margin-top:38px;text-align:center;color:var(--soft);font-size:12px;}
-  .foot .pill{display:inline-block;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:999px;padding:7px 16px;}
-
-  /* 색 헬퍼 (배경/글자/스터드) */
-  .peach{background:var(--peach);color:var(--peach-t);} .mint{background:var(--mint);color:var(--mint-t);}
-  .rose{background:var(--rose);color:var(--rose-t);} .apricot{background:var(--apricot);color:var(--apricot-t);}
-  .lav{background:var(--lav);color:var(--lav-t);} .sky{background:var(--sky);color:var(--sky-t);}
-  .sage{background:var(--sage);color:var(--sage-t);} .gray{background:#F1EEF6;color:var(--soft);}
-  .s-peach{background:var(--peach);} .s-mint{background:var(--mint);} .s-rose{background:var(--rose);}
-  .s-apricot{background:var(--apricot);} .s-lav{background:var(--lav);} .s-sky{background:var(--sky);} .s-sage{background:var(--sage);}
+  .foot{margin-top:40px;text-align:center;color:var(--soft);font-size:12px;}
 </style>
 </head>
 <body>
   <div class="wrap">
 
-    <div class="note">
-      🧸 <b>구조 미리보기</b> — 내용은 비어 있고, 각 칸에 들어갈 항목만 점선으로 표시했어요.
-      이 틀이 구글 시트의 탭/열과 연결됩니다. <span style="color:#BBB2C8">(섹션 옆 회색 = 시트 탭)</span>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="kicker">LET'S GO SCHOOL</div>
+      <div class="sub">○○ 선생님 · 마이 프로필</div>
+      <div class="title"><span class="r">이</span><span class="o">름</span><span class="g"> </span><span class="b">선생님</span></div>
+      <div class="role">직함 / 한 줄 소개가 여기에</div>
+      <div class="herobtns">
+        <div class="bigbrick bb-blue"><span class="studs"><i></i><i></i><i></i><i></i></span>🏫 소속 · 메인 소개 🧱</div>
+        <div class="bigbrick bb-red"><span class="studs"><i></i><i></i><i></i><i></i></span>▶ 유튜브 구독 0,000명 · 영상 000개</div>
+      </div>
     </div>
 
-    <!-- 프로필 -->
-    <div class="card hero-card">
-      <div class="hint"><i class="s-rose"></i><i class="s-lav"></i></div>
-      <div class="hero">
-        <div class="avatar">🧑‍🏫</div>
-        <div style="flex:1;min-width:0;">
-          <div class="row"><span class="name">이름</span><span class="badge">♡ 협업 가능</span></div>
-          <div class="ph" style="margin-top:9px;">직함 — 예: 레고에듀케이션 공인강사 · 메이커 교사</div>
-          <div class="ph">🏫 소속 (학교/기관)</div>
-          <div class="ph">한 줄 소개 (태그라인)</div>
-          <div class="row" style="margin-top:10px;">
-            <span class="chip gray">📍 지역</span><span class="chip gray">✉️ 이메일</span><span class="chip gray">🌐 웹사이트</span>
+    <!-- 내비 -->
+    <div class="nav">
+      <span class="navbtn"><span class="studs"><i></i><i></i></span>🧑‍🏫 교사소개</span>
+      <span class="navbtn"><span class="studs"><i></i><i></i></span>🎤 연수·강의</span>
+      <span class="navbtn"><span class="studs"><i></i><i></i></span>🧱 교단일기</span>
+      <span class="navbtn"><span class="studs"><i></i><i></i></span>📦 개발자료</span>
+      <span class="navbtn"><span class="studs"><i></i><i></i></span>🚀 프로젝트</span>
+      <span class="navbtn"><span class="studs"><i></i><i></i></span>🏆 수상·자격</span>
+    </div>
+
+    <!-- 교사소개 -->
+    <div class="bar b-blue"><span class="studs sl"><i></i><i></i><i></i></span>교사소개 🧑‍🏫<span class="tab">Basics · About · Socials</span><span class="studs sr"><i></i><i></i><i></i></span></div>
+    <div class="card">
+      <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;">
+        <div class="idcard"><div class="top"><span class="studs"><i></i><i></i></span></div><div class="photo">🧑‍🏫</div></div>
+        <div style="flex:1;min-width:240px;">
+          <h3 style="font-size:24px;">이름</h3>
+          <div class="ph" style="margin-top:8px;">한 줄 소개 — 예: 학교를 사랑하는 선생님</div>
+          <div class="row" style="margin-top:12px;">
+            <span class="pill">전문분야 태그</span><span class="pill">자격/인증</span><span class="pill">키워드</span><span class="pill">키워드</span>
           </div>
-          <div class="row" style="margin-top:9px;">
-            <span class="pillbtn">🔗 블로그</span><span class="pillbtn">▶️ YouTube</span><span class="pillbtn">🐙 GitHub</span><span class="pillbtn">✉️ Email</span>
+          <div style="margin-top:14px;">
+            <span class="navbtn" style="background:var(--blue);color:#fff;"><span class="studs"><i></i><i></i></span>📋 선생님의 발자취 ▼</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="sec" style="margin-top:9px;"><span class="tab">시트 탭: Basics · Socials</span></div>
 
     <!-- 소개 -->
-    <div class="sec"><span class="ic peach">✿</span><h2>소개</h2><span class="tab">About</span></div>
-    <div class="card">
-      <div class="hint"><i class="s-peach"></i><i class="s-peach"></i></div>
-      <div class="ph" style="padding:16px;">자기소개 + 교육 철학 본문 (여러 줄)</div>
-    </div>
+    <div class="bar b-orange"><span class="studs sl"><i></i><i></i><i></i></span>소개 ✏️<span class="tab">About</span><span class="studs sr"><i></i><i></i><i></i></span></div>
+    <div class="card"><div class="ph" style="padding:16px;">자기소개 + 교육 철학 본문 (여러 줄)</div></div>
 
     <!-- 전문분야 -->
-    <div class="sec"><span class="ic mint">✦</span><h2>전문분야</h2><span class="tab">Skills</span></div>
+    <div class="bar b-green"><span class="studs sl"><i></i><i></i><i></i></span>전문분야 🧩<span class="tab">Skills</span><span class="studs sr"><i></i><i></i><i></i></span></div>
     <div class="grid2">
       <div class="card">
-        <div class="hint"><i class="s-sky"></i><i class="s-sky"></i></div>
-        <h3 style="margin-bottom:12px;color:var(--ink);font-size:16px;">분류 (예: 코딩교육)</h3>
-        <div class="between" style="margin-bottom:9px;"><span>분야명</span><span class="meter"><i class="s-sky"></i><i class="s-sky"></i><i class="s-sky"></i><i class="s-sky"></i><i class="s-sky"></i><i class="s-sky"></i><i class="s-sky"></i><i class="s-sky"></i><i></i><i></i></span></div>
-        <div class="between"><span>분야명</span><span class="meter"><i class="s-sky"></i><i class="s-sky"></i><i class="s-sky"></i><i class="s-sky"></i><i class="s-sky"></i><i class="s-sky"></i><i></i><i></i><i></i><i></i></span></div>
+        <h3 style="margin-bottom:12px;">분류 (예: 코딩교육)</h3>
+        <div class="between" style="margin-bottom:9px;"><span>분야명</span><span class="meter"><i class="on c-blue"></i><i class="on c-blue"></i><i class="on c-blue"></i><i class="on c-blue"></i><i class="on c-blue"></i><i class="on c-blue"></i><i class="on c-blue"></i><i class="on c-blue"></i><i></i><i></i></span></div>
+        <div class="between"><span>분야명</span><span class="meter"><i class="on c-blue"></i><i class="on c-blue"></i><i class="on c-blue"></i><i class="on c-blue"></i><i class="on c-blue"></i><i class="on c-blue"></i><i></i><i></i><i></i><i></i></span></div>
       </div>
       <div class="card">
-        <div class="hint"><i class="s-rose"></i><i class="s-rose"></i></div>
-        <h3 style="margin-bottom:12px;color:var(--ink);font-size:16px;">분류 (예: 메이커)</h3>
-        <div class="between" style="margin-bottom:9px;"><span>분야명</span><span class="meter"><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i></i></span></div>
-        <div class="between"><span>분야명</span><span class="meter"><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i class="s-rose"></i><i></i><i></i><i></i></span></div>
+        <h3 style="margin-bottom:12px;">분류 (예: 메이커)</h3>
+        <div class="between" style="margin-bottom:9px;"><span>분야명</span><span class="meter"><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i></i></span></div>
+        <div class="between"><span>분야명</span><span class="meter"><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i class="on c-red"></i><i></i><i></i><i></i></span></div>
       </div>
     </div>
-    <div class="sec"><span class="tab">숙련도(level 0~100)는 동글동글 막대로 표시</span></div>
 
     <!-- 연수·강의 -->
-    <div class="sec"><span class="ic rose">✎</span><h2>연수 · 강의 (진행)</h2><span class="tab">Training</span></div>
-    <div class="card">
-      <div class="hint"><i class="s-rose"></i><i class="s-rose"></i></div>
-      <div class="between"><span class="title">연수/강의명</span><span class="soft">날짜</span></div>
-      <div class="ph" style="margin-top:9px;">주최기관 · 장소</div>
-      <div class="ph">설명</div>
-      <div class="row" style="margin-top:11px;"><span class="chip rose">역할</span><span class="chip sky">대상</span><span class="chip mint">차시·시간</span><span class="chip apricot">인원</span></div>
+    <div class="bar b-red"><span class="studs sl"><i></i><i></i><i></i></span>연수 · 강의 (진행) 🎤<span class="tab">Training</span><span class="studs sr"><i></i><i></i><i></i></span></div>
+    <div class="stripcard">
+      <div class="strip b-red"><span class="studs"><i></i><i></i><i></i></span></div>
+      <div class="body">
+        <div class="between"><span class="title2">연수/강의명</span><span class="date">날짜</span></div>
+        <div class="ph" style="margin-top:8px;">주최기관 · 장소 / 설명</div>
+        <div class="row" style="margin-top:11px;"><span class="chip c-red">역할</span><span class="chip c-blue">대상</span><span class="chip c-green">차시·시간</span><span class="chip c-orange">인원</span></div>
+      </div>
     </div>
 
-    <!-- 개발 자료 -->
-    <div class="sec"><span class="ic apricot">❑</span><h2>개발 자료</h2><span class="tab">Resources · 연도별</span></div>
-    <span class="yearchip">🗓 2024</span>
-    <div class="grid2">
-      <div class="card">
-        <div class="hint"><i class="s-lav"></i><i class="s-lav"></i></div>
-        <div class="between"><span class="title">자료명</span><span>🔓</span></div>
-        <div class="ph" style="margin-top:9px;">설명</div>
-        <div class="row" style="margin-top:10px;"><span class="chip lav">종류</span><span class="chip sky">주제</span><span class="chip gray">대상</span></div>
-        <div style="margin-top:12px;"><span class="linkbtn">자료 보기 ↗</span></div>
-      </div>
-      <div class="card">
-        <div class="hint"><i class="s-mint"></i><i class="s-mint"></i></div>
-        <div class="between"><span class="title">자료명</span></div>
-        <div class="row" style="margin-top:10px;"><span class="chip mint">종류</span><span class="chip sky">주제</span><span class="chip gray">대상</span></div>
-      </div>
+    <!-- 개발자료 -->
+    <div class="bar b-orange"><span class="studs sl"><i></i><i></i><i></i></span>개발 자료 📦<span class="tab">Resources · 연도별</span><span class="studs sr"><i></i><i></i><i></i></span></div>
+    <div class="years">
+      <span class="ytab on b-red"><span class="studs"><i></i><i></i></span><div class="y">2024</div><div class="n">0개</div></span>
+      <span class="ytab b-blue"><span class="studs"><i></i><i></i></span><div class="y">2023</div><div class="n">0개</div></span>
+      <span class="ytab b-green"><span class="studs"><i></i><i></i></span><div class="y">2022</div><div class="n">0개</div></span>
+      <span class="ytab b-orange"><span class="studs"><i></i><i></i></span><div class="y">2021</div><div class="n">0개</div></span>
     </div>
-    <span class="yearchip">🗓 2023</span>
     <div class="grid2">
-      <div class="card">
-        <div class="hint"><i class="s-apricot"></i><i class="s-apricot"></i></div>
-        <div class="between"><span class="title">자료명</span><span>🔓</span></div>
-        <div class="row" style="margin-top:10px;"><span class="chip apricot">종류</span><span class="chip sky">주제</span></div>
-      </div>
+      <div class="stripcard"><div class="strip b-orange"><span class="studs"><i></i><i></i><i></i></span></div><div class="body">
+        <div class="between"><span class="title2">자료명</span><span>🔓</span></div>
+        <div class="ph" style="margin-top:8px;">설명</div>
+        <div class="row" style="margin-top:10px;"><span class="chip c-purple">종류</span><span class="chip c-blue">주제</span><span class="chip c-gray">대상</span></div>
+      </div></div>
+      <div class="stripcard"><div class="strip b-green"><span class="studs"><i></i><i></i><i></i></span></div><div class="body">
+        <div class="between"><span class="title2">자료명</span></div>
+        <div class="row" style="margin-top:10px;"><span class="chip c-green">종류</span><span class="chip c-blue">주제</span></div>
+      </div></div>
     </div>
 
     <!-- 교단일기 -->
-    <div class="sec"><span class="ic lav">❀</span><h2>교단일기 · 성장일기</h2><span class="tab">Journal · 연도별</span></div>
-    <div class="tl">
-      <div class="year">2024</div>
-      <div class="card">
-        <div class="hint"><i class="s-lav"></i><i class="s-lav"></i></div>
-        <div class="between"><span class="title">일기 제목</span><span class="soft">날짜</span></div>
-        <div class="ph" style="margin-top:9px;">내용 (그날의 수업 · 생각 · 성장 기록)</div>
-        <div class="row" style="margin-top:10px;"><span class="chip lav">태그</span><span class="chip gray">태그</span></div>
-      </div>
-      <div class="year">2023</div>
-      <div class="card">
-        <div class="hint"><i class="s-lav"></i><i class="s-lav"></i></div>
-        <div class="between"><span class="title">일기 제목</span><span class="soft">날짜</span></div>
-        <div class="ph" style="margin-top:9px;">내용</div>
-      </div>
+    <div class="bar b-red"><span class="studs sl"><i></i><i></i><i></i></span>교단일기 🧱<span class="tab">Journal · 연도별</span><span class="studs sr"><i></i><i></i><i></i></span></div>
+    <div class="years">
+      <span class="ytab on b-red"><span class="studs"><i></i><i></i></span><div class="y">2026</div><div class="n">0개</div></span>
+      <span class="ytab b-blue"><span class="studs"><i></i><i></i></span><div class="y">2025</div><div class="n">0개</div></span>
+      <span class="ytab b-green"><span class="studs"><i></i><i></i></span><div class="y">2024</div><div class="n">0개</div></span>
+      <span class="ytab b-orange"><span class="studs"><i></i><i></i></span><div class="y">2023</div><div class="n">0개</div></span>
+      <span class="ytab b-red"><span class="studs"><i></i><i></i></span><div class="y">2022</div><div class="n">0개</div></span>
+    </div>
+    <div class="grid2">
+      <div class="stripcard"><div class="strip b-red"><span class="studs"><i></i><i></i><i></i></span></div><div class="body">
+        <div class="date">날짜</div><div class="title2" style="margin:2px 0 4px;">일기 제목</div>
+        <div class="ph">내용 (그날의 수업 · 생각 · 성장 기록)</div>
+      </div></div>
+      <div class="stripcard"><div class="strip b-red"><span class="studs"><i></i><i></i><i></i></span></div><div class="body">
+        <div class="date">날짜</div><div class="title2" style="margin:2px 0 4px;">일기 제목</div>
+        <div class="ph">내용</div>
+      </div></div>
     </div>
 
     <!-- 경력 -->
-    <div class="sec"><span class="ic sage">❖</span><h2>경력 · 활동</h2><span class="tab">Experience</span></div>
+    <div class="bar b-blue"><span class="studs sl"><i></i><i></i><i></i></span>경력 · 활동 💼<span class="tab">Experience</span><span class="studs sr"><i></i><i></i><i></i></span></div>
     <div class="card">
-      <div class="hint"><i class="s-sage"></i><i class="s-sage"></i></div>
-      <div class="between"><span class="title">역할 · 소속</span><span class="soft">시작 ~ 종료(또는 현재)</span></div>
-      <div class="ph" style="margin-top:9px;">📍 지역 / 설명</div>
+      <div class="between"><span class="title2">역할 · 소속</span><span class="date">시작 ~ 종료(또는 현재)</span></div>
+      <div class="ph" style="margin-top:8px;">📍 지역 / 설명</div>
       <div class="ph">🔹 주요 성과 (여러 줄)</div>
     </div>
 
     <!-- 프로젝트 -->
-    <div class="sec"><span class="ic sky">✷</span><h2>프로젝트 · 운영</h2><span class="tab">Projects</span></div>
+    <div class="bar b-green"><span class="studs sl"><i></i><i></i><i></i></span>프로젝트 · 운영 🚀<span class="tab">Projects</span><span class="studs sr"><i></i><i></i><i></i></span></div>
     <div class="grid2">
-      <div class="card">
-        <div class="hint"><i class="s-sky"></i><i class="s-sky"></i></div>
-        <div class="between"><span class="title">제목</span><span>⭐</span></div>
-        <div class="ph" style="margin-top:9px;">설명</div>
-        <div class="row" style="margin-top:10px;"><span class="chip sky">태그</span><span class="chip gray">태그</span></div>
-        <div style="margin-top:12px;"><span class="linkbtn">바로가기 ↗</span></div>
-      </div>
-      <div class="card">
-        <div class="hint"><i class="s-apricot"></i><i class="s-apricot"></i></div>
-        <div class="between"><span class="title">제목</span></div>
-        <div class="ph" style="margin-top:9px;">설명</div>
-        <div class="row" style="margin-top:10px;"><span class="chip apricot">태그</span></div>
-      </div>
+      <div class="stripcard"><div class="strip b-blue"><span class="studs"><i></i><i></i><i></i></span></div><div class="body">
+        <div class="between"><span class="title2">제목</span><span>⭐</span></div>
+        <div class="ph" style="margin-top:8px;">설명</div>
+        <div class="row" style="margin-top:10px;"><span class="chip c-blue">태그</span><span class="chip c-gray">태그</span></div>
+      </div></div>
+      <div class="stripcard"><div class="strip b-orange"><span class="studs"><i></i><i></i><i></i></span></div><div class="body">
+        <div class="between"><span class="title2">제목</span></div>
+        <div class="ph" style="margin-top:8px;">설명</div>
+      </div></div>
     </div>
 
     <!-- 이수 연수 -->
-    <div class="sec"><span class="ic mint">✿</span><h2>이수 연수</h2><span class="tab">TrainingReceived</span></div>
+    <div class="bar b-orange"><span class="studs sl"><i></i><i></i><i></i></span>이수 연수 📒<span class="tab">TrainingReceived</span><span class="studs sr"><i></i><i></i><i></i></span></div>
     <div class="card">
-      <div class="hint"><i class="s-mint"></i><i class="s-mint"></i></div>
-      <div class="between" style="border-bottom:1px dashed var(--line);padding-bottom:11px;margin-bottom:11px;"><span>연수명</span><span class="soft">기관 · 시간 · 이수일</span></div>
-      <div class="between"><span>연수명</span><span class="soft">기관 · 시간 · 이수일</span></div>
+      <div class="between" style="border-bottom:1px dashed var(--line);padding-bottom:11px;margin-bottom:11px;"><span style="font-weight:700;">연수명</span><span class="soft">기관 · 시간 · 이수일</span></div>
+      <div class="between"><span style="font-weight:700;">연수명</span><span class="soft">기관 · 시간 · 이수일</span></div>
     </div>
 
-    <!-- 학력 -->
-    <div class="sec"><span class="ic sky">✦</span><h2>학력</h2><span class="tab">Education</span></div>
+    <!-- 수상·자격 -->
+    <div class="bar b-red"><span class="studs sl"><i></i><i></i><i></i></span>수상 · 자격증 🏆<span class="tab">Awards</span><span class="studs sr"><i></i><i></i><i></i></span></div>
     <div class="grid2">
-      <div class="card">
-        <div class="hint"><i class="s-sky"></i><i class="s-sky"></i></div>
-        <span class="title">학교</span>
-        <div class="ph" style="margin-top:9px;">전공 · 학위</div>
-        <div class="soft" style="margin-top:6px;">시작 ~ 종료</div>
-      </div>
+      <div class="card"><div class="row">🏅 <span class="title2">명칭</span><span class="chip c-gray">자격증</span></div><div class="soft" style="margin-top:6px;">발급기관 · 취득일</div></div>
+      <div class="card"><div class="row">🏅 <span class="title2">명칭</span><span class="chip c-orange">수상</span></div><div class="soft" style="margin-top:6px;">주최기관 · 수상일</div></div>
     </div>
 
-    <!-- 수상 -->
-    <div class="sec"><span class="ic apricot">♕</span><h2>수상 · 자격증</h2><span class="tab">Awards</span></div>
-    <div class="grid2">
-      <div class="card">
-        <div class="hint"><i class="s-apricot"></i><i class="s-apricot"></i></div>
-        <div class="row">🏅 <span class="title">명칭</span><span class="chip gray">자격증</span></div>
-        <div class="soft" style="margin-top:6px;">발급기관 · 취득일</div>
-      </div>
-      <div class="card">
-        <div class="hint"><i class="s-apricot"></i><i class="s-apricot"></i></div>
-        <div class="row">🏅 <span class="title">명칭</span><span class="chip rose">수상</span></div>
-        <div class="soft" style="margin-top:6px;">주최기관 · 수상일</div>
-      </div>
-    </div>
-
-    <div class="foot">
-      <span class="pill">구조 미리보기 · 내용 비어 있음</span>
-      <div style="margin-top:8px;">🧸 파스텔 · 은은한 레고 힌트</div>
-    </div>
+    <div class="foot">🧱 구조 미리보기 · 내용 비어 있음 — 옛 레고학교 사이트 톤 반영</div>
 
   </div>
 </body>
