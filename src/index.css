@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  body {
+    @apply font-body text-lego-black;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* 단일 스터드 (브릭 위 돌기) */
+  .stud {
+    @apply rounded-full shadow-stud;
+    background: radial-gradient(
+      circle at 35% 30%,
+      rgba(255, 255, 255, 0.55),
+      rgba(0, 0, 0, 0.08) 70%
+    );
+  }
+
+  /* 레고 베이스플레이트 배경 — 옅은 스터드 격자 */
+  .baseplate {
+    background-color: theme("colors.lego.plate");
+    background-image: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.35) 0,
+      rgba(255, 255, 255, 0.35) 4px,
+      rgba(0, 0, 0, 0.06) 5px,
+      transparent 6px
+    );
+    background-size: 34px 34px;
+    background-position: 0 0;
+  }
+}
